@@ -1,13 +1,10 @@
-# ESPHome Project Template
+# Base Project Files
 
-This repo serves as a template for creating a new ESPHome project.
+This files houses all my base project files and components. I use the same
+components (such as the DHT11 environment sensor) again and again, so instead of
+copying and pasting YAML again and again, utilising the package system will make
+things easy and consistent across projects.
 
-It includes a GitHub workflow that will automatically build the configuration(s) and then deploys a simple 
-website via GitHub pages that utilises [ESP Web Tools](https://esphome.github.io/esp-web-tools/) for users to 
-easily install your project onto their device.
+## Notes
 
-## Instructions
-
-1. Use this repo template to [generate](https://github.com/esphome/esphome-project-template/generate) your own repository.
-2. Clone your new repository.
-3. Follow the checklist created as an issue in your new repository.
+Components may be broken out into their own repository in the future.

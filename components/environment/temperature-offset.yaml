@@ -32,6 +32,6 @@ number:
               format: "${temperature_name} has changed from %.1f to %.1f"
               args:
                 - id(sensor_dht_${sensor_id}_temperature).state
-                - id(sensor_dht_${sensor_id}_temperature).state - x
+                - id(sensor_dht_${sensor_id}_temperature).state + x
               level: INFO
               tag: Environment

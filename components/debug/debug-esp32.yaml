@@ -1,0 +1,18 @@
+esphome:
+  name: debug-esp32
+  project:
+    name: curtistinkers.debug-esp32
+    version: 1.0.0
+
+packages:
+  project-base: !include debug-base.yaml
+
+sensor:
+  min_free:
+    name: "Heap Min Free"
+    entity_category: "diagnostic"
+    disabled_by_default: true
+  psram:
+    name: "Free PSRAM"
+    entity_category: "diagnostic"
+    disabled_by_default: true

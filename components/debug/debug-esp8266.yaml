@@ -1,0 +1,15 @@
+esphome:
+  name: debug-esp8266
+  project:
+    name: curtistinkers.debug-esp8266
+    version: 1.0.0
+
+packages:
+  project-base: !include debug-base.yaml
+
+sensor:
+  - platform: adc
+    pin: VCC
+    name: "VCC Voltage"
+    entity_category: "diagnostic"
+    disabled_by_default: true

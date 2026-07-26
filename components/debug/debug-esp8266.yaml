@@ -11,5 +11,6 @@ sensor:
   - platform: adc
     pin: VCC
     name: "VCC Voltage"
+    icon: "mdi:power-plug"
     entity_category: "diagnostic"
     disabled_by_default: true

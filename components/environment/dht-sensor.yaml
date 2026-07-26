@@ -7,6 +7,7 @@ esphome:
     - priority: -100
       then:
         # Update temperature, otherwise takes 60s to update for the first time.
+        - delay: 10s
         - component.update: sensor_dht_${sensor_id}
 
 substitutions:

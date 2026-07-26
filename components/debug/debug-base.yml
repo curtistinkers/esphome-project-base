@@ -32,10 +32,6 @@ sensor:
       name: "Heap Max Block"
       entity_category: "diagnostic"
       disabled_by_default: true
-    min_free:
-      name: "Heap Min Free"
-      entity_category: "diagnostic"
-      disabled_by_default: true
     fragmentation:
       name: "Heap Fragmentation"
       entity_category: "diagnostic"

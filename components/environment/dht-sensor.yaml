@@ -1,0 +1,46 @@
+substitutions:
+  sensor_id: "1"
+  temperature_name: "Temperature"
+  humidity_name: "Humidity"
+  update_interval: "60s"
+
+esphome:
+  name: dht-sensor
+  project:
+    name: curtistinkers.dht-sensor
+    version: 1.0.0
+  on_boot:
+    then:
+      # Update temperature, otherwise takes 60s to update for the first time.
+      - component.update: sensor_dht_${sensor_id}
+
+packages:
+  humidity-offset: !include
+    file: humidity-offset.yaml
+    vars:
+      sensor_id: ${sensor_id}
+      humidity_name: ${humidity_name}
+  temperature-offset: !include
+    file: temperature-offset.yaml
+    vars:
+      sensor_id: ${sensor_id}
+      temperature_name: ${temperature_name}
+  
+sensor:
+  - platform: dht
+    id: sensor_dht_${sensor_id}
+    pin: ${pin}
+    update_interval: ${update_interval}
+    temperature:
+      id: sensor_dht_${sensor_id}_temperature
+      name: ${temperature_name}
+      icon: "mdi:thermometer"
+      filters:
+        - lambda: return x + id(number_temperature_offset_${sensor_id}).state;
+    humidity:
+      id: sensor_dht_${sensor_id}_humidity
+      name: ${humidity_name}
+      icon: "mdi:water-opacity"
+      filters:
+        - lambda: return x + id(number_humidity_offset_${sensor_id}).state;
+    

@@ -1,0 +1,30 @@
+esphome:
+  name: temperature-offset
+  project:
+    name: curtistinkers.temperature-offset
+    version: 1.0.0
+
+number:
+  - platform: template
+    name: ${temperature_name} Offset
+    id: number_temperature_offset_${sensor_id}
+    min_value: -10
+    max_value: 10
+    step: 0.1
+    initial_value: 0
+    icon: "mdi:thermometer-check"
+    unit_of_measurement: "°C"
+    entity_category: config
+    optimistic: true
+    mode: BOX
+    restore_value: true
+    disabled_by_default: true
+    on_value:
+      - then:
+          - component.update: sensor_dht_${sensor_id}
+          - logger.log:
+              format: "${temperature_name} Offset changed to %.0f"
+              args:
+                - x
+              level: INFO
+              tag: Environment

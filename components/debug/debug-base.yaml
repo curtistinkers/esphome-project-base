@@ -44,3 +44,7 @@ sensor:
       name: "CPU Frequency"
       entity_category: "diagnostic"
       disabled_by_default: true
+      unit_of_measurement: MHz
+      filters:
+      - lambda: |-
+          return x / 1000000;

@@ -1,7 +1,11 @@
 substitutions:
   sensor_id: "1"
-  temperature_name: "Temperature"
   humidity_name: "Humidity"
+  humidity_disabled_by_default: false
+  humidity_entity_category: ""
+  temperature_name: "Temperature"
+  temperature_disabled_by_default: false
+  temperature_entity_category: ""
   update_interval: "60s"
 
 esphome:
@@ -10,9 +14,10 @@ esphome:
     name: curtistinkers.dht-sensor
     version: 1.0.0
   on_boot:
-    then:
-      # Update temperature, otherwise takes 60s to update for the first time.
-      - component.update: sensor_dht_${sensor_id}
+    - priority: -100
+      then:
+        # Update temperature, otherwise takes 60s to update for the first time.
+        - component.update: sensor_dht_${sensor_id}
 
 packages:
   humidity-offset: !include
@@ -31,16 +36,20 @@ sensor:
     id: sensor_dht_${sensor_id}
     pin: ${pin}
     update_interval: ${update_interval}
-    temperature:
-      id: sensor_dht_${sensor_id}_temperature
-      name: ${temperature_name}
-      icon: "mdi:thermometer"
-      filters:
-        - lambda: return x + id(number_temperature_offset_${sensor_id}).state;
     humidity:
       id: sensor_dht_${sensor_id}_humidity
       name: ${humidity_name}
       icon: "mdi:water-opacity"
+      entity_category: ${humidity_entity_category}
+      disabled_by_default: ${humidity_disabled_by_default}     
       filters:
         - lambda: return x + id(number_humidity_offset_${sensor_id}).state;
     
+    temperature:
+      id: sensor_dht_${sensor_id}_temperature
+      name: ${temperature_name}
+      icon: "mdi:thermometer"
+      entity_category: ${temperature_entity_category}
+      disabled_by_default: ${temperature_disabled_by_default}
+      filters:
+        - lambda: return x + id(number_temperature_offset_${sensor_id}).state;

@@ -1,13 +1,3 @@
-substitutions:
-  sensor_id: "1"
-  humidity_name: "Humidity"
-  humidity_disabled_by_default: false
-  humidity_entity_category: ""
-  temperature_name: "Temperature"
-  temperature_disabled_by_default: false
-  temperature_entity_category: ""
-  update_interval: "60s"
-
 esphome:
   name: dht-sensor
   project:
@@ -19,12 +9,23 @@ esphome:
         # Update temperature, otherwise takes 60s to update for the first time.
         - component.update: sensor_dht_${sensor_id}
 
+substitutions:
+  sensor_id: "1"
+  humidity_name: "Humidity"
+  humidity_disabled_by_default: false
+  humidity_entity_category: ""
+  temperature_name: "Temperature"
+  temperature_disabled_by_default: false
+  temperature_entity_category: ""
+  update_interval: "60s"
+
 packages:
   humidity-offset: !include
     file: humidity-offset.yaml
     vars:
       sensor_id: ${sensor_id}
       humidity_name: ${humidity_name}
+
   temperature-offset: !include
     file: temperature-offset.yaml
     vars:
@@ -36,6 +37,7 @@ sensor:
     id: sensor_dht_${sensor_id}
     pin: ${pin}
     update_interval: ${update_interval}
+
     humidity:
       id: sensor_dht_${sensor_id}_humidity
       name: ${humidity_name}

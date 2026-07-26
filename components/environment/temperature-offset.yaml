@@ -30,8 +30,8 @@ number:
           - logger.log:
               format: "${temperature_name} has changed from %.0f to %.0f"
               args:
-                - id(sensor_dht_temperature_${sensor_id}).state
-                - id(sensor_dht_temperature_${sensor_id}).state + x
+                - id(sensor_dht_${sensor_id}_temperature).state
+                - id(sensor_dht_${sensor_id}_temperature).state + x
               level: INFO
               tag: Environment
           - component.update: sensor_dht_${sensor_id}

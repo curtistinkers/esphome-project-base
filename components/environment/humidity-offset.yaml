@@ -21,6 +21,7 @@ number:
     disabled_by_default: true
     on_value:
       - then:
+          - component.update: sensor_dht_${sensor_id}
           - logger.log:
               format: "${humidity_name} Offset changed to %.1f"
               args:
@@ -31,7 +32,6 @@ number:
               format: "${humidity_name} has changed from %.1f to %.1f"
               args:
                 - id(sensor_dht_${sensor_id}_humidity).state
-                - id(sensor_dht_${sensor_id}_humidity).state + x
+                - id(sensor_dht_${sensor_id}_humidity).state - x
               level: INFO
               tag: Environment
-          - component.update: sensor_dht_${sensor_id}
